@@ -1,13 +1,15 @@
 import React from 'react';
 import { ArrowRight, BookOpen } from 'lucide-react';
 import { allBlogs } from '../data/blogs';
+import BackgroundDecorations from './BackgroundDecorations';
 
 export default function BlogSection({ onSelectBlog, onViewAll, blogs = allBlogs }) {
   // Get top 3 latest blogs
   const latestBlogs = blogs.slice(0, 3);
 
   return (
-    <section id="blog" className="section" style={{ background: 'var(--bg-primary)' }}>
+    <section id="blog" className="section blog-section-custom">
+      <BackgroundDecorations />
       <div className="container">
         <div className="section-header">
           <span>Insights & Updates</span>

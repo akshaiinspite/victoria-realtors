@@ -1,5 +1,6 @@
 import React from 'react';
-import { Quote, Star } from 'lucide-react';
+import { Quote, Star, ShieldCheck } from 'lucide-react';
+import BackgroundDecorations from './BackgroundDecorations';
 
 export default function Testimonials() {
   const testimonials = [
@@ -30,7 +31,8 @@ export default function Testimonials() {
   ];
 
   return (
-    <section className="section" style={{ background: 'var(--bg-secondary)' }}>
+    <section className="testimonials-section" id="testimonials">
+      <BackgroundDecorations />
       <div className="container">
         <div className="section-header">
           <span>Client Stories</span>
@@ -38,28 +40,35 @@ export default function Testimonials() {
           <p>Read about the experiences of our valued clients who found their perfect homes and gated communities with us.</p>
         </div>
 
-        <div className="testimonials-slider">
+        <div className="testimonials-grid-v2 testimonials-slider">
           {testimonials.map((test, index) => (
             <div key={index} className="testimonial-card glass-card">
-              <Quote className="quote-icon" size={64} />
-              
-              <div className="stars">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} size={14} fill="currentColor" />
-                ))}
-              </div>
-
-              <p className="testimonial-text">"{test.text}"</p>
-
-              <div className="client-info">
+              <div className="testimonial-card-top">
                 <div className="client-avatar">
                   {test.initials}
                 </div>
                 <div className="client-text">
                   <div className="client-name">{test.name}</div>
                   <div className="client-property">{test.project}</div>
+                  <div className="verified-owner-badge">
+                    <ShieldCheck size={12} fill="rgba(16, 185, 129, 0.1)" />
+                    <span>Verified Homeowner</span>
+                  </div>
                 </div>
               </div>
+
+              <div className="testimonial-divider"></div>
+
+              <div className="testimonial-card-bottom">
+                <div className="stars">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} size={14} fill="currentColor" />
+                  ))}
+                </div>
+                <p className="testimonial-text">"{test.text}"</p>
+              </div>
+
+              <Quote className="quote-icon" size={48} />
             </div>
           ))}
         </div>

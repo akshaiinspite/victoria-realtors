@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import Lenis from 'lenis';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import CompanyIntro from './components/CompanyIntro';
 import Stats from './components/Stats';
+import DistrictLocations from './components/DistrictLocations';
 import PropertyList from './components/PropertyList';
 import MortgageCalculator from './components/MortgageCalculator';
 import Testimonials from './components/Testimonials';
@@ -47,6 +49,38 @@ export default function App() {
       window.location.hash = '';
     }
   };
+
+  // Initialize Lenis smooth scroll
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      touchMultiplier: 2,
+      infinite: false,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    // Sync ScrollTrigger with Lenis scroll updates
+    lenis.on('scroll', () => {
+      import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
+        ScrollTrigger.update();
+      });
+    });
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
 
   // Synchronize browser history navigation with state
   useEffect(() => {
@@ -322,18 +356,15 @@ export default function App() {
           />
         ) : (
           <>
-            <Hero filters={filters} setFilters={setFilters} trackEngagement={trackEngagement} />
+            <Hero setCurrentPage={setCurrentPage} />
             <Stats />
-            <CompanyIntro />
-            <PropertyList 
-              filters={filters} 
-              onEnquire={handleEnquireProperty} 
-              onSelectProject={(id) => { setSelectedProjectId(id); setCurrentPage('project-details'); }}
-              comparisonList={comparisonList}
-              onToggleCompare={handleToggleCompare}
-              properties={propertiesList}
+            <DistrictLocations 
+              onDistrictClick={(district) => {
+                setFilters(prev => ({ ...prev, location: district }));
+                setCurrentPage('projects');
+              }}
             />
-            <MortgageCalculator trackEngagement={trackEngagement} />
+            <CompanyIntro />
             <Testimonials />
             <GoogleReviews />
             <BlogSection 

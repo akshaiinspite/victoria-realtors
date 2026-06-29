@@ -1,5 +1,6 @@
 import React from 'react';
 import { Star, ShieldCheck, ExternalLink } from 'lucide-react';
+import BackgroundDecorations from './BackgroundDecorations';
 import './GoogleReviews.css';
 
 export default function GoogleReviews() {
@@ -43,7 +44,8 @@ export default function GoogleReviews() {
   ];
 
   return (
-    <section className="google-reviews-section section">
+    <section className="google-reviews-section section" style={{ position: 'relative', overflow: 'hidden' }}>
+      <BackgroundDecorations />
       <div className="container">
         <div className="section-header">
           <span>Customer Trust & Testimonials</span>

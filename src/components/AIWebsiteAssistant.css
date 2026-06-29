@@ -1,7 +1,7 @@
 .ai-assistant-wrapper {
   position: fixed;
-  bottom: 24px;
-  right: 96px;
+  bottom: 96px;
+  right: 24px;
   z-index: 9999;
   font-family: 'Outfit', sans-serif;
   display: flex;
@@ -56,13 +56,13 @@
 
 @media (max-width: 640px) {
   .ai-assistant-wrapper {
-    right: 84px;
-    bottom: 18px;
+    right: 18px;
+    bottom: 80px;
   }
 
   .assistant-bubble {
-    width: 52px;
-    height: 52px;
+    width: 50px;
+    height: 50px;
   }
 
   .bubble-tooltip {
@@ -404,12 +404,12 @@
 
 @media (max-width: 480px) {
   .ai-assistant-wrapper {
-    right: 20px;
-    bottom: 84px; /* Stack above typical mobile bottom navigation if active */
+    right: 18px;
+    bottom: 80px;
   }
   .assistant-drawer {
-    width: calc(100vw - 40px);
-    height: 400px;
+    width: calc(100vw - 36px);
+    height: 440px;
     bottom: 64px;
   }
   .bubble-tooltip {

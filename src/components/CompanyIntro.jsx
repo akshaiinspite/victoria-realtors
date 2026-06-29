@@ -1,44 +1,53 @@
 import React from 'react';
-import { ShieldCheck, Compass, HeartHandshake, Key, CheckSquare, Award } from 'lucide-react';
+import { ShieldCheck, Compass, HeartHandshake, Key, CheckSquare } from 'lucide-react';
+import BackgroundDecorations from './BackgroundDecorations';
 
 export default function CompanyIntro() {
   return (
     <>
       {/* About Section */}
-      <section id="about" className="section" style={{ background: 'var(--bg-primary)' }}>
+      <section id="about" className="section about-section-v2">
+        <BackgroundDecorations />
         <div className="container">
-          <div className="about-grid animate-fade-in">
-            {/* Image Showcase */}
-            <div className="about-images">
-              <div className="about-img-wrapper">
-                <img src="/assets/general/img-a.jpg" alt="Victoria Realtors Property" className="about-img" />
+          <div className="about-grid-v2">
+            {/* Image Showcase — Stacked with accent overlap */}
+            <div className="about-images-v2">
+              <div className="about-img-primary">
+                <img src="/assets/general/img-a.jpg" alt="Victoria Realtors Team" className="about-img" />
               </div>
-              <div className="about-img-wrapper offset">
-                <img src="/assets/general/img-b.jpg" alt="Victoria Realtors Handover" className="about-img" />
+              <div className="about-img-secondary">
+                <img src="/assets/general/img-b-new.png" alt="Victoria Realtors Key Handover" className="about-img" />
               </div>
-              <div className="about-tag glass-card">
-                <h4>20+</h4>
-                <p>Years of Legacy</p>
+              <div className="about-experience-badge">
+                <span className="about-badge-number">20+</span>
+                <span className="about-badge-text">Years of Legacy</span>
               </div>
             </div>
 
-            {/* Text Copy */}
-            <div className="about-content">
-              <span className="hero-subtitle" style={{ fontSize: '0.85rem' }}>About Victoria Realtors</span>
-              <h3>Committed Towards Setting A New Benchmark In Customer Satisfaction</h3>
-              <p className="about-p">
+            {/* Text Content */}
+            <div className="about-content-v2">
+              <div className="about-label-wrapper">
+                <span className="about-accent-line"></span>
+                <span className="about-label">About Victoria Realtors</span>
+              </div>
+              <h3 className="about-heading-v2">
+                Committed Towards Setting A New Benchmark In Customer Satisfaction
+              </h3>
+              <p className="about-text-primary">
                 Having entered the real estate sector over two decades ago, Victoria Realtors has redefined the market and to this day continues to deliver state-of-the-art projects at affordable rates.
               </p>
-              <p className="about-p-secondary" style={{ color: 'var(--text-secondary)' }}>
+              <p className="about-text-secondary">
                 At Victoria Realtors, we take great pride in honouring the commitments made to our clients. From delivering projects on time to providing dedicated post sales services, we always strive to ensure complete customer satisfaction.
               </p>
               
-              <div style={{ display: 'flex', gap: '1.5rem', marginTop: '2rem' }}>
-                <a href="https://victoriarealtors.in/key-handingover/" target="_blank" rel="noreferrer" className="btn btn-primary" style={{ display: 'inline-flex', gap: '0.5rem', alignItems: 'center' }}>
-                  <Key size={16} /> Key Handing Over
+              <div className="about-ctas-v2">
+                <a href="https://victoriarealtors.in/key-handingover/" target="_blank" rel="noreferrer" className="about-cta-primary">
+                  <Key size={16} />
+                  <span>Key Handing Over</span>
                 </a>
-                <a href="https://victoriarealtors.in/fully-sold-out-projects" target="_blank" rel="noreferrer" className="btn btn-secondary" style={{ display: 'inline-flex', gap: '0.5rem', alignItems: 'center' }}>
-                  <CheckSquare size={16} /> Fully Sold Out
+                <a href="https://victoriarealtors.in/fully-sold-out-projects" target="_blank" rel="noreferrer" className="about-cta-secondary">
+                  <CheckSquare size={16} />
+                  <span>Fully Sold Out</span>
                 </a>
               </div>
             </div>
@@ -47,7 +56,8 @@ export default function CompanyIntro() {
       </section>
 
       {/* Brand Value Pillars (Quality, Service, Price) */}
-      <section className="section" style={{ background: 'var(--bg-secondary)', borderTop: '1px solid var(--border-color)' }}>
+      <section className="section pillars-section-custom">
+        <BackgroundDecorations />
         <div className="container">
           <div className="section-header">
             <span>Our Core Pillars</span>
@@ -108,9 +118,10 @@ export default function CompanyIntro() {
       </section>
 
       {/* Villa Developers in Kerala Copy (SEO/Long-form content) */}
-      <section className="section seo-split-section" style={{ background: 'var(--bg-primary)', borderTop: '1px solid var(--border-color)', padding: '6rem 0' }}>
+      <section className="section seo-split-section">
+        <BackgroundDecorations />
         <div className="container">
-          <div className="seo-split-grid" style={{ display: 'grid', gridTemplateColumns: '1.15fr 0.85fr', gap: '4rem', alignItems: 'center' }}>
+          <div className="seo-split-grid" style={{ position: 'relative', zIndex: 2, display: 'grid', gridTemplateColumns: '1.15fr 0.85fr', gap: '4rem', alignItems: 'center' }}>
             {/* Text Side */}
             <div className="seo-content" style={{ textAlign: 'left' }}>
               <span className="hero-subtitle" style={{ fontSize: '0.85rem' }}>Trusted Villa Builders</span>
