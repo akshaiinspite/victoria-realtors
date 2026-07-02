@@ -144,7 +144,7 @@ a {
   margin: 0 auto 4rem auto;
 }
 
-.section-header span {
+.section-header > span {
   font-family: var(--font-sans);
   color: var(--primary);
   font-size: 0.875rem;

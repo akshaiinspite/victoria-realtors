@@ -2640,10 +2640,16 @@
 }
 
 /* Make sure header text elements are clearly visible against dark banner */
-.blog-section-custom .section-header span {
+.blog-section-custom .section-header > span {
   color: #ff5c62;
   font-weight: 700;
   letter-spacing: 0.15em;
+}
+
+.blog-section-custom .section-header-pill {
+  border-color: rgba(255, 92, 98, 0.4) !important;
+  background: rgba(255, 92, 98, 0.08) !important;
+  color: #ff5c62 !important;
 }
 
 .blog-section-custom .section-header h2 {
