@@ -299,92 +299,95 @@ export default function Projects({ filters: initialFilters, setFilters: setAppFi
           {/* Aligned Buildings / Properties Grid */}
           <div className="properties-grid">
             {filteredProperties.length > 0 ? (
-              filteredProperties.map(property => (
-                <article key={property.id} className="property-card glass-card">
-                  <div className="property-image-container">
-                    <img 
-                      src={`/assets/properties/${property.img}`} 
-                      alt={property.name} 
-                      className="property-img"
-                      loading="lazy"
-                    />
-                    <div className="property-image-overlay">
-                      {property.status === 'sold' ? (
-                        <span className="property-badge-sold">Sold Out</span>
-                      ) : (
-                        <span className="property-badge-active">Active</span>
-                      )}
-                      <button 
-                        className={`property-fav-btn ${favorites[property.id] ? 'active' : ''}`}
-                        onClick={() => toggleFavorite(property.id)}
-                        aria-label="Add to favorites"
-                      >
-                        <Heart size={18} fill={favorites[property.id] ? 'currentColor' : 'none'} />
-                      </button>
-                    </div>
-                  </div>
-
-                  <div className="property-details">
-                    <div className="property-location">
-                      <MapPin size={14} className="text-primary" />
-                      <span>{property.location}, India</span>
-                    </div>
-                    <h3 className="property-title">{property.name}</h3>
-                    <div className="property-price">{getPriceLabel(property)}</div>
-
-                    <div className="property-specs">
-                      <div className="spec-item">
-                        <Maximize size={16} />
-                        <span>{property.area}</span>
-                      </div>
-                      <div className="spec-item">
-                        <Award size={16} />
-                        <span style={{ textTransform: 'capitalize' }}>{property.type}</span>
+              filteredProperties.map((property, index) => {
+                const isBento = index % 5 === 0;
+                return (
+                  <article key={property.id} className={`property-card glass-card ${isBento ? 'featured-bento' : ''}`}>
+                    <div className="property-image-container">
+                      <img 
+                        src={`/assets/properties/${property.img}`} 
+                        alt={property.name} 
+                        className="property-img"
+                        loading="lazy"
+                      />
+                      <div className="property-image-overlay">
+                        {property.status === 'sold' ? (
+                          <span className="property-badge-sold">Sold Out</span>
+                        ) : (
+                          <span className="property-badge-active">Active</span>
+                        )}
+                        <button 
+                          className={`property-fav-btn ${favorites[property.id] ? 'active' : ''}`}
+                          onClick={() => toggleFavorite(property.id)}
+                          aria-label="Add to favorites"
+                        >
+                          <Heart size={18} fill={favorites[property.id] ? 'currentColor' : 'none'} />
+                        </button>
                       </div>
                     </div>
 
-                    <div className="property-actions">
-                      <button 
-                        onClick={() => onSelectProject(property.id)}
-                        className="btn btn-secondary"
-                        style={{ display: 'inline-flex', gap: '0.4rem', flex: 1, justifyContent: 'center' }}
-                      >
-                        <Eye size={14} /> View Details
-                      </button>
-                      {property.status !== 'sold' ? (
-                        <button 
-                          className="btn btn-primary"
-                          style={{ flex: 1 }}
-                          onClick={() => onEnquire(property.name)}
-                        >
-                          Enquire Now
-                        </button>
-                      ) : (
-                        <button 
-                          className="btn btn-primary" 
-                          style={{ flex: 1, opacity: 0.6, cursor: 'not-allowed' }}
-                          disabled
-                        >
-                          Sold Out
-                        </button>
-                      )}
-                    </div>
+                    <div className="property-details">
+                      <div className="property-location">
+                        <MapPin size={14} className="text-primary" />
+                        <span>{property.location}, India</span>
+                      </div>
+                      <h3 className="property-title">{property.name}</h3>
+                      <div className="property-price">{getPriceLabel(property)}</div>
 
-                    {/* Add to Compare checkbox */}
-                    <div className="property-compare-wrapper">
-                      <label className="compare-checkbox-label">
-                        <input 
-                          type="checkbox"
-                          checked={comparisonList.some(p => p.id === property.id)}
-                          onChange={() => onToggleCompare(property)}
-                          disabled={comparisonList.length >= 3 && !comparisonList.some(p => p.id === property.id)}
-                        />
-                        {comparisonList.some(p => p.id === property.id) ? '✓ Added to Compare' : 'Add to Compare (Max 3)'}
-                      </label>
+                      <div className="property-specs">
+                        <div className="spec-item">
+                          <Maximize size={16} />
+                          <span>{property.area}</span>
+                        </div>
+                        <div className="spec-item">
+                          <Award size={16} />
+                          <span style={{ textTransform: 'capitalize' }}>{property.type}</span>
+                        </div>
+                      </div>
+
+                      <div className="property-actions">
+                        <button 
+                          onClick={() => onSelectProject(property.id)}
+                          className="btn btn-secondary"
+                          style={{ display: 'inline-flex', gap: '0.4rem', flex: 1, justifyContent: 'center' }}
+                        >
+                          <Eye size={14} /> View Details
+                        </button>
+                        {property.status !== 'sold' ? (
+                          <button 
+                            className="btn btn-primary"
+                            style={{ flex: 1 }}
+                            onClick={() => onEnquire(property.name)}
+                          >
+                            Enquire Now
+                          </button>
+                        ) : (
+                          <button 
+                            className="btn btn-primary" 
+                            style={{ flex: 1, opacity: 0.6, cursor: 'not-allowed' }}
+                            disabled
+                          >
+                            Sold Out
+                          </button>
+                        )}
+                      </div>
+
+                      {/* Add to Compare checkbox */}
+                      <div className="property-compare-wrapper">
+                        <label className="compare-checkbox-label">
+                          <input 
+                            type="checkbox"
+                            checked={comparisonList.some(p => p.id === property.id)}
+                            onChange={() => onToggleCompare(property)}
+                            disabled={comparisonList.length >= 3 && !comparisonList.some(p => p.id === property.id)}
+                          />
+                          {comparisonList.some(p => p.id === property.id) ? '✓ Added to Compare' : 'Add to Compare (Max 3)'}
+                        </label>
+                      </div>
                     </div>
-                  </div>
-                </article>
-              ))
+                  </article>
+                );
+              })
             ) : (
               <div className="no-properties-found" style={{ gridColumn: '1 / -1', padding: '6rem 2rem', textAlign: 'center' }}>
                 <p style={{ fontSize: '1.25rem', marginBottom: '1.5rem', color: 'var(--text-secondary)' }}>No properties match your current search filters.</p>
