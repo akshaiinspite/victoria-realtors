@@ -50,6 +50,18 @@ export default function Navbar({ currentPage, setCurrentPage, setFilters, compar
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
+
+
   const navLinks = [
     { name: 'Home', path: '#' },
     { name: 'About', path: '#about' },
