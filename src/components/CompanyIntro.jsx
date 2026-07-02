@@ -26,19 +26,18 @@ export default function CompanyIntro() {
 
             {/* Text Content */}
             <div className="about-content-v2">
-              <div className="about-label-wrapper">
-                <span className="about-accent-line"></span>
-                <span className="about-label">About Victoria Realtors</span>
-              </div>
+              <span className="about-label-pill">Company Profile</span>
               <h3 className="about-heading-v2">
-                Committed Towards Setting A New Benchmark In Customer Satisfaction
+                COMMITTED TOWARDS SETTING A <span className="text-highlight-red">NEW BENCHMARK</span> IN CUSTOMER SATISFACTION
               </h3>
-              <p className="about-text-primary">
-                Having entered the real estate sector over two decades ago, Victoria Realtors has redefined the market and to this day continues to deliver state-of-the-art projects at affordable rates.
-              </p>
-              <p className="about-text-secondary">
-                At Victoria Realtors, we take great pride in honouring the commitments made to our clients. From delivering projects on time to providing dedicated post sales services, we always strive to ensure complete customer satisfaction.
-              </p>
+              <div className="about-desc-container">
+                <p className="about-text-primary">
+                  Having entered the real estate sector over two decades ago, Victoria Realtors has redefined the market and to this day continues to deliver state-of-the-art projects at affordable rates.
+                </p>
+                <p className="about-text-secondary">
+                  At Victoria Realtors, we take great pride in honouring the commitments made to our clients. From delivering projects on time to providing dedicated post sales services, we always strive to ensure complete customer satisfaction.
+                </p>
+              </div>
               
               <div className="about-ctas-v2">
                 <a href="https://victoriarealtors.in/key-handingover/" target="_blank" rel="noreferrer" className="about-cta-primary">
@@ -60,58 +59,58 @@ export default function CompanyIntro() {
         <BackgroundDecorations />
         <div className="container">
           <div className="section-header">
-            <span>Our Core Pillars</span>
-            <h2>Redefining Property Standards</h2>
+            <span className="section-header-pill">Our Core Pillars</span>
+            <h2>REDEFINING <span className="text-highlight-red">PROPERTY STANDARDS</span></h2>
             <p>We build communities with three fundamental standards: unparalleled quality, reliable post-sales service, and honest pricing.</p>
           </div>
 
           <div className="features-grid">
             {/* Quality Pillar */}
-            <article className="feature-card glass-card">
-              <div className="feature-icon-box">
-                <ShieldCheck size={28} />
+            <article className="pillar-card">
+              <div className="pillar-img-container">
+                <img 
+                  src="/assets/general/quality_new.png" 
+                  alt="Quality Pillar" 
+                />
               </div>
-              <img 
-                src="/assets/general/quality_new.png" 
-                alt="Quality Pillar" 
-                style={{ width: '100%', height: '180px', objectFit: 'cover', borderRadius: 'var(--radius-sm)', marginBottom: '1.5rem' }} 
-              />
-              <h3>Uncompromised Quality</h3>
-              <p style={{ fontSize: '0.9rem' }}>
-                The development team at Victoria Realtors understand that a home should be as safe and secure as possible. The team incorporates only high-end construction materials from global brands and follows the most stringent safety standards for each and every project.
-              </p>
+              <div className="pillar-info">
+                <h3>Uncompromised Quality</h3>
+                <p>
+                  The development team at Victoria Realtors understand that a home should be as safe and secure as possible. The team incorporates only high-end construction materials from global brands and follows the most stringent safety standards for each and every project.
+                </p>
+              </div>
             </article>
 
             {/* Service Pillar */}
-            <article className="feature-card glass-card">
-              <div className="feature-icon-box">
-                <HeartHandshake size={28} />
+            <article className="pillar-card">
+              <div className="pillar-img-container">
+                <img 
+                  src="/assets/general/service_new.png" 
+                  alt="Service Pillar" 
+                />
               </div>
-              <img 
-                src="/assets/general/service_new.png" 
-                alt="Service Pillar" 
-                style={{ width: '100%', height: '180px', objectFit: 'cover', borderRadius: 'var(--radius-sm)', marginBottom: '1.5rem' }} 
-              />
-              <h3>Dedicated Service</h3>
-              <p style={{ fontSize: '0.9rem' }}>
-                With over 20 years of experience in the real estate sector, mostly invested in a range of projects in Palakkad, Victoria Realtors is one of the most trusted brands down South. The company constantly aims towards developing projects for the masses and has completed many milestone projects so far.
-              </p>
+              <div className="pillar-info">
+                <h3>Dedicated Service</h3>
+                <p>
+                  With over 20 years of experience in the real estate sector, mostly invested in a range of projects in Palakkad, Victoria Realtors is one of the most trusted brands down South. The company constantly aims towards developing projects for the masses and has completed many milestone projects so far.
+                </p>
+              </div>
             </article>
 
             {/* Price Pillar */}
-            <article className="feature-card glass-card">
-              <div className="feature-icon-box">
-                <Compass size={28} />
+            <article className="pillar-card">
+              <div className="pillar-img-container">
+                <img 
+                  src="/assets/general/price_new.png" 
+                  alt="Price Pillar" 
+                />
               </div>
-              <img 
-                src="/assets/general/price_new.png" 
-                alt="Price Pillar" 
-                style={{ width: '100%', height: '180px', objectFit: 'cover', borderRadius: 'var(--radius-sm)', marginBottom: '1.5rem' }} 
-              />
-              <h3>Affordable Pricing</h3>
-              <p style={{ fontSize: '0.9rem' }}>
-                Each project designed and developed by Victoria Realtors is aimed towards providing quality living spaces at affordable rates. The concept for each project is to ensure that the end consumer is not troubled by the ever increasing rates and to make the process of owning a house as pleasant as possible and not filled with hassles.
-              </p>
+              <div className="pillar-info">
+                <h3>Affordable Pricing</h3>
+                <p>
+                  Each project designed and developed by Victoria Realtors is aimed towards providing quality living spaces at affordable rates. The concept for each project is to ensure that the end consumer is not troubled by the ever increasing rates and to make the process of owning a house as pleasant as possible and not filled with hassles.
+                </p>
+              </div>
             </article>
           </div>
         </div>
@@ -124,9 +123,11 @@ export default function CompanyIntro() {
           <div className="seo-split-grid" style={{ position: 'relative', zIndex: 2, display: 'grid', gridTemplateColumns: '1.15fr 0.85fr', gap: '4rem', alignItems: 'center' }}>
             {/* Text Side */}
             <div className="seo-content" style={{ textAlign: 'left' }}>
-              <span className="hero-subtitle" style={{ fontSize: '0.85rem' }}>Trusted Villa Builders</span>
-              <h2 style={{ fontSize: '2.5rem', marginBottom: '1.5rem', fontFamily: 'var(--font-serif)', color: 'var(--text-primary)' }}>Villa Developers in Kerala</h2>
-              <div style={{ color: 'var(--text-secondary)', display: 'flex', flexDirection: 'column', gap: '1.25rem', lineHeight: '1.75', fontSize: '0.95rem' }}>
+              <span className="about-label-pill">Trusted Villa Builders</span>
+              <h2 style={{ fontSize: '2.75rem', marginBottom: '2rem', fontFamily: 'var(--font-sans)', fontWeight: 800, textTransform: 'uppercase', color: 'var(--text-primary)' }}>
+                Villa Developers in <span className="text-highlight-red">Kerala</span>
+              </h2>
+              <div className="about-desc-container" style={{ color: 'var(--text-secondary)' }}>
                 <p>
                   <strong>Victoria Realtors</strong>, one of the best villa builders in Kerala, aspires to serve home seekers with the best of the kind of home living experience with a luxurious abundance and elite magnificence. Victoria Realtors promises a symbiosis of style and quality in creating homes for you. We do not only create houses but homes that can nurture passion, vigour, spirit, liveliness, togetherness and moreover love.
                 </p>
@@ -148,22 +149,13 @@ export default function CompanyIntro() {
               />
               <div style={{
                 position: 'absolute',
-                bottom: '1rem',
-                right: '1rem',
-                background: 'rgba(17, 24, 39, 0.85)',
-                color: '#fff',
-                padding: '0.4rem 0.8rem',
-                borderRadius: '50px',
-                fontSize: '0.75rem',
-                backdropFilter: 'blur(8px)',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                border: '1px solid rgba(255, 255, 255, 0.15)'
-              }}>
-                <span className="live-dot" style={{ width: '8px', height: '8px', background: '#10b981', borderRadius: '50%', display: 'inline-block' }}></span>
-                3D CAD Interactive Model
-              </div>
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                background: 'linear-gradient(to top, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 50%)',
+                pointerEvents: 'none'
+              }}></div>
             </div>
           </div>
         </div>

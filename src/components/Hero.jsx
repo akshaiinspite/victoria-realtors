@@ -1,8 +1,9 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
-import { ArrowDown, ChevronRight } from 'lucide-react';
+import { ArrowDown, ChevronRight, Volume2, VolumeX } from 'lucide-react';
 
 export default function Hero({ setCurrentPage }) {
+  const [isMuted, setIsMuted] = useState(true);
   const heroRef = useRef(null);
   const titleRef = useRef(null);
   const subtitleRef = useRef(null);
@@ -19,6 +20,7 @@ export default function Hero({ setCurrentPage }) {
       gsap.set(descRef.current, { y: 30, opacity: 0 });
       gsap.set(ctaRef.current, { y: 30, opacity: 0 });
       gsap.set(scrollIndicatorRef.current, { y: 20, opacity: 0 });
+      gsap.set('.hero-video-control', { y: 20, opacity: 0 });
       gsap.set('.hero-overlay-line', { scaleX: 0 });
 
       // Master timeline
@@ -66,21 +68,24 @@ export default function Hero({ setCurrentPage }) {
         ease: 'power2.out'
       }, '-=0.3');
 
-      // Scroll indicator
-      tl.to(scrollIndicatorRef.current, {
+      // Scroll indicator & video control
+      tl.to([scrollIndicatorRef.current, '.hero-video-control'], {
         y: 0,
         opacity: 1,
         duration: 0.6,
-        ease: 'power2.out'
+        ease: 'power2.out',
+        stagger: 0.1
       }, '-=0.2');
 
       // Parallax on scroll
       const handleScroll = () => {
-        if (bgRef.current) {
+        if (bgRef.current && heroRef.current) {
           const scrollY = window.scrollY;
-          const heroHeight = heroRef.current?.offsetHeight || 900;
+          const heroHeight = heroRef.current.offsetHeight || 900;
           if (scrollY < heroHeight) {
-            bgRef.current.style.transform = `translateY(${scrollY * 0.35}px) scale(1.1)`;
+            // Translate the container down as the user scrolls, matching the top: -5% offset in CSS
+            const translateVal = (scrollY / heroHeight) * (heroHeight * 0.05);
+            bgRef.current.style.transform = `translateY(${translateVal}px)`;
           }
         }
       };
@@ -93,9 +98,9 @@ export default function Hero({ setCurrentPage }) {
   }, []);
 
   // Split title into words for animation
-  const titleLine1 = 'Crafting Homes of';
-  const titleLine2 = 'Timeless Heritage';
-  const titleLine3 = '& Comfort';
+  const titleLine1 = 'Revolutionising The';
+  const titleLine2 = 'Real Estate Sector';
+  const titleLine3 = 'In Kerala';
 
   const renderWords = (text, highlight = false) => {
     return text.split(' ').map((word, i) => (
@@ -111,9 +116,18 @@ export default function Hero({ setCurrentPage }) {
 
   return (
     <section className="hero-section-v2" ref={heroRef} id="hero-section">
-      {/* Background Image with Parallax */}
+      {/* Background Parallax Wrapper */}
       <div className="hero-bg-wrapper">
-        <div className="hero-bg-image" ref={bgRef}></div>
+        <div className="hero-bg-parallax-container" ref={bgRef}>
+          <video
+            className="hero-bg-video"
+            src="/14476-257440741.mp4"
+            autoPlay
+            loop
+            muted={isMuted}
+            playsInline
+          />
+        </div>
         <div className="hero-bg-overlay"></div>
         {/* Decorative accent lines */}
         <div className="hero-overlay-line hero-line-1"></div>
@@ -138,8 +152,7 @@ export default function Hero({ setCurrentPage }) {
           </h1>
 
           <p className="hero-v2-description" ref={descRef}>
-            For over two decades, Victoria Realtors has been Kerala's trusted partner in designing 
-            state-of-the-art premium villas and apartments. Discover a sanctuary that nurtures 
+            Dedicated To Delivering Quality Living Spaces. Discover a sanctuary that nurtures 
             togetherness, peace, and family life.
           </p>
 
@@ -152,7 +165,7 @@ export default function Hero({ setCurrentPage }) {
               <ChevronRight size={18} />
             </button>
             <a
-              href="https://wa.me/919159165893?text=Hi,%20I%20would%20like%20to%20enquire%20about%20Victoria%20Realtors%20properties."
+              href="https://wa.me/917907878203?text=Hi,%20I%20would%20like%20to%20enquire%20about%20Victoria%20Realtors%20properties."
               target="_blank"
               rel="noreferrer"
               className="hero-cta-secondary"
@@ -161,6 +174,26 @@ export default function Hero({ setCurrentPage }) {
             </a>
           </div>
         </div>
+      </div>
+
+      {/* Video Control Button */}
+      <div className="hero-video-control">
+        <button
+          className="hero-mute-btn"
+          onClick={() => setIsMuted(prev => !prev)}
+          title={isMuted ? "Unmute Ambient Sound" : "Mute Sound"}
+        >
+          <div className={`soundwave ${isMuted ? 'soundwave--muted' : ''}`}>
+            <span className="soundwave-bar"></span>
+            <span className="soundwave-bar"></span>
+            <span className="soundwave-bar"></span>
+            <span className="soundwave-bar"></span>
+          </div>
+          <span className="hero-mute-btn-text">
+            {isMuted ? "Sound Off" : "Sound On"}
+          </span>
+          {isMuted ? <VolumeX size={14} className="hero-mute-icon" /> : <Volume2 size={14} className="hero-mute-icon" />}
+        </button>
       </div>
 
       {/* Scroll Indicator */}

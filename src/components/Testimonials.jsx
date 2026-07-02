@@ -35,8 +35,8 @@ export default function Testimonials() {
       <BackgroundDecorations />
       <div className="container">
         <div className="section-header">
-          <span>Client Stories</span>
-          <h2>What Our Homeowners Say</h2>
+          <span className="section-header-pill">Client Stories</span>
+          <h2>WHAT OUR <span className="text-highlight-red">HOMEOWNERS SAY</span></h2>
           <p>Read about the experiences of our valued clients who found their perfect homes and gated communities with us.</p>
         </div>
 

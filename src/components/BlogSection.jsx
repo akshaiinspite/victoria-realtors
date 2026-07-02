@@ -12,8 +12,8 @@ export default function BlogSection({ onSelectBlog, onViewAll, blogs = allBlogs 
       <BackgroundDecorations />
       <div className="container">
         <div className="section-header">
-          <span>Insights & Updates</span>
-          <h2>Our Latest Blogs</h2>
+          <span className="section-header-pill">Insights & Updates</span>
+          <h2>OUR LATEST <span className="text-highlight-red">INSIGHTS & BLOGS</span></h2>
           <p>Read articles on traditional Kerala Nalukettu villas, architecture heritage, and regional real estate market updates.</p>
         </div>
 

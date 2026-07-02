@@ -102,7 +102,7 @@ Message: ${formData.message}`;
     
     setSubmitted(true);
     setTimeout(() => {
-      const whatsappUrl = `https://wa.me/919159165893?text=${encodeURIComponent(text)}`;
+      const whatsappUrl = `https://wa.me/917907878203?text=${encodeURIComponent(text)}`;
       window.open(whatsappUrl, '_blank');
       setFormData({
         name: '',
@@ -119,25 +119,17 @@ Message: ${formData.message}`;
     {
       type: 'Registered Office',
       city: 'Coimbatore',
-      address: '62-2, A.T.T Colony, Dr. Balasundaram Road, Coimbatore - 641018.',
-      phone: '+91 91591 65893',
-      phoneLink: 'tel:+919159165893',
-      mapsSearch: 'https://www.google.com/maps/search/?api=1&query=Victoria+Realtors+Balasundaram+Road+Coimbatore'
-    },
-    {
-      type: 'Branch Office',
-      city: 'Coimbatore',
-      address: '127, 1st Floor, Thirugnanasambandam Road, Opp. Bishop Appasamy College, Race Course, Coimbatore - 641018.',
-      phone: '+91 95147 78788',
-      phoneLink: 'tel:+919514778788',
+      address: 'Third Floor, PNR Edifice, 38, GD Naidu St, adjacent to Grasp Clothing, Race Course, Coimbatore, Tamil Nadu - 641018.',
+      phone: '+91 79078 78203',
+      phoneLink: 'tel:+917907878203',
       mapsSearch: 'https://www.google.com/maps/search/?api=1&query=Victoria+Realtors+Race+Course+Coimbatore'
     },
     {
       type: 'Branch Office',
       city: 'Palakkad',
       address: 'Near Head Post Office, Mettupalayam Street, Palakkad - 678001.',
-      phone: '+91 91591 65893',
-      phoneLink: 'tel:+919159165893',
+      phone: '+91 79078 78203',
+      phoneLink: 'tel:+917907878203',
       mapsSearch: 'https://www.google.com/maps/search/?api=1&query=Victoria+Realtors+Mettupalayam+Street+Palakkad'
     }
   ];
@@ -152,104 +144,11 @@ Message: ${formData.message}`;
         </div>
       </section>
 
-      {/* Office Locations Addresses */}
-      <section className="offices-section">
-        <div className="container">
-          <div className="section-header" style={{ textAlign: 'center' }}>
-            <span>Find Our Offices</span>
-            <h2>Our Office Locations</h2>
-            <p>Visit one of our branches or get in touch for face-to-face consultations with our villa experts.</p>
-          </div>
-
-          <div className="offices-grid">
-            {offices.map((office, idx) => (
-              <div key={idx} className="office-card">
-                <div className="office-icon">
-                  <MapPinIcon />
-                </div>
-                <span>{office.type}</span>
-                <h3>{office.city}</h3>
-                <p className="office-address">{office.address}</p>
-                <div className="office-phone">
-                  <PhoneIcon />
-                  <a href={office.phoneLink}>{office.phone}</a>
-                </div>
-                <a 
-                  href={office.mapsSearch} 
-                  target="_blank" 
-                  rel="noreferrer" 
-                  className="office-link"
-                >
-                  Get Directions <ExternalLinkIcon />
-                </a>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Panel Grid (Email, Phone, Socials vs Form) */}
+      {/* Contact Panel Grid (Email, Phone, Socials vs Form) — RENDERED FIRST */}
       <section className="contact-panel-section">
         <div className="container contact-panel-grid">
           
-          {/* Left panel: Info & Socials */}
-          <div className="contact-info-card">
-            <h3>Contact Information</h3>
-            <div className="contact-list">
-              
-              <div className="contact-item">
-                <div className="contact-item-icon">
-                  <MailIcon />
-                </div>
-                <div className="contact-item-details">
-                  <h4>Email Us</h4>
-                  <a href="mailto:enquiry@victoriarealtors.in">enquiry@victoriarealtors.in</a>
-                </div>
-              </div>
-
-              <div className="contact-item">
-                <div className="contact-item-icon">
-                  <PhoneIcon />
-                </div>
-                <div className="contact-item-details">
-                  <h4>Call Us</h4>
-                  <a href="tel:+919159165893">+91 91591 65893</a>
-                  <span style={{ display: 'block', fontSize: '0.9rem', color: 'var(--text-muted)' }}>+91 95147 78788</span>
-                </div>
-              </div>
-
-              <div className="contact-item">
-                <div className="contact-item-icon">
-                  <MessageSquareIcon />
-                </div>
-                <div className="contact-item-details">
-                  <h4>WhatsApp</h4>
-                  <a 
-                    href="https://wa.me/919159165893?text=Hi%20there,%20I'd%20like%20to%20know%20more%20about%20your%20properties." 
-                    target="_blank" 
-                    rel="noreferrer"
-                  >
-                    +91 91591 65893
-                  </a>
-                </div>
-              </div>
-
-            </div>
-
-            {/* Social Links */}
-            <div className="contact-social-box">
-              <h4>Follow Us</h4>
-              <div className="contact-social-links">
-                <a href="https://www.facebook.com/VictoriaDevelopers" target="_blank" rel="noreferrer" className="contact-social-circle" aria-label="Facebook"><FacebookIcon /></a>
-                <a href="https://www.instagram.com/victoriarealtors" target="_blank" rel="noreferrer" className="contact-social-circle" aria-label="Instagram"><InstagramIcon /></a>
-                <a href="https://twitter.com/VictoriaRealto5" target="_blank" rel="noreferrer" className="contact-social-circle" aria-label="Twitter"><TwitterIcon /></a>
-                <a href="https://www.linkedin.com/in/victoriarealtors" target="_blank" rel="noreferrer" className="contact-social-circle" aria-label="LinkedIn"><LinkedinIcon /></a>
-                <a href="https://www.youtube.com/c/VictoriaRealtors" target="_blank" rel="noreferrer" className="contact-social-circle" aria-label="YouTube"><YoutubeIcon /></a>
-              </div>
-            </div>
-          </div>
-
-          {/* Right panel: Inquiry Form */}
+          {/* Left panel: Inquiry Form (Now First) */}
           <div className="contact-form-container">
             <h3>Send us a Message</h3>
             <p>Fill out the form below and our team will get back to you within 24 hours.</p>
@@ -339,6 +238,98 @@ Message: ${formData.message}`;
             )}
           </div>
 
+          {/* Right panel: Info & Socials (Now Second) */}
+          <div className="contact-info-card">
+            <h3>Contact Information</h3>
+            <div className="contact-list">
+              
+              <div className="contact-item">
+                <div className="contact-item-icon">
+                  <MailIcon />
+                </div>
+                <div className="contact-item-details">
+                  <h4>Email Us</h4>
+                  <a href="mailto:Victoriasooraj@gmail.com">Victoriasooraj@gmail.com</a>
+                </div>
+              </div>
+
+              <div className="contact-item">
+                <div className="contact-item-icon">
+                  <PhoneIcon />
+                </div>
+                <div className="contact-item-details">
+                  <h4>Call Us</h4>
+                  <a href="tel:+917907878203">+91 79078 78203</a>
+                </div>
+              </div>
+
+              <div className="contact-item">
+                <div className="contact-item-icon">
+                  <MessageSquareIcon />
+                </div>
+                <div className="contact-item-details">
+                  <h4>WhatsApp</h4>
+                  <a 
+                    href="https://wa.me/917907878203?text=Hi%20there,%20I'd%20like%20to%20know%20more%20about%20your%20properties." 
+                    target="_blank" 
+                    rel="noreferrer"
+                  >
+                    +91 79078 78203
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+            {/* Social Links */}
+            <div className="contact-social-box">
+              <h4>Follow Us</h4>
+              <div className="contact-social-links">
+                <a href="https://www.facebook.com/VictoriaDevelopers" target="_blank" rel="noreferrer" className="contact-social-circle" aria-label="Facebook"><FacebookIcon /></a>
+                <a href="https://www.instagram.com/victoriarealtors" target="_blank" rel="noreferrer" className="contact-social-circle" aria-label="Instagram"><InstagramIcon /></a>
+                <a href="https://twitter.com/VictoriaRealto5" target="_blank" rel="noreferrer" className="contact-social-circle" aria-label="Twitter"><TwitterIcon /></a>
+                <a href="https://www.linkedin.com/in/victoriarealtors" target="_blank" rel="noreferrer" className="contact-social-circle" aria-label="LinkedIn"><LinkedinIcon /></a>
+                <a href="https://www.youtube.com/c/VictoriaRealtors" target="_blank" rel="noreferrer" className="contact-social-circle" aria-label="YouTube"><YoutubeIcon /></a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* Office Locations Addresses — RENDERED SECOND */}
+      <section className="offices-section">
+        <div className="container">
+          <div className="section-header" style={{ textAlign: 'center' }}>
+            <span>Find Our Offices</span>
+            <h2>Our Office Locations</h2>
+            <p>Visit one of our branches or get in touch for face-to-face consultations with our villa experts.</p>
+          </div>
+
+          <div className="offices-grid">
+            {offices.map((office, idx) => (
+              <div key={idx} className="office-card">
+                <div className="office-icon">
+                  <MapPinIcon />
+                </div>
+                <span>{office.type}</span>
+                <h3>{office.city}</h3>
+                <p className="office-address">{office.address}</p>
+                <div className="office-phone">
+                  <PhoneIcon />
+                  <a href={office.phoneLink}>{office.phone}</a>
+                </div>
+                <a 
+                  href={office.mapsSearch} 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  className="office-link"
+                >
+                  Get Directions <ExternalLinkIcon />
+                </a>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </div>

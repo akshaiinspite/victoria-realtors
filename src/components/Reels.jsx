@@ -5,6 +5,16 @@ import './Reels.css';
 const REELS_DATA = [
   {
     id: 1,
+    title: 'Victoria Premium Gated Villa Tour',
+    location: 'Signature Gated Community, Palakkad',
+    price: '₹65 Lakhs onwards',
+    videoUrl: '/assets/banner/VID-20241004-WA0018.mp4',
+    likes: 428,
+    views: '2.5k',
+    description: 'A walkthrough of our premium gated villa community. Ready to occupy with luxury amenities.'
+  },
+  {
+    id: 2,
     title: 'Luxury Villa Tour in Thrissur',
     location: 'Victoria Tanima, Thrissur',
     price: '₹75 Lakhs',
@@ -14,7 +24,7 @@ const REELS_DATA = [
     description: 'Experience pure elegance in our traditional-modern fusion villas. 3 & 4 BHK units starting from 75L.'
   },
   {
-    id: 2,
+    id: 3,
     title: 'Modern Apartment Living',
     location: 'Victoria Ushas, Palakkad',
     price: '₹55 Lakhs',
@@ -24,7 +34,7 @@ const REELS_DATA = [
     description: 'Breathtaking views, premium fixtures, and a lush green gated environment. Ready to occupy.'
   },
   {
-    id: 3,
+    id: 4,
     title: 'Beautiful Living Room Aesthetics',
     location: 'Victoria Ashirvaad, Ottapalam',
     price: '₹68 Lakhs',
@@ -123,7 +133,7 @@ export default function Reels() {
 
   const handleWhatsAppEnquiry = (reel) => {
     const text = `Hi Victoria Realtors, I saw your Reel: "${reel.title}" (${reel.location}) for ${reel.price} on the website and would like to get more information.`;
-    window.open(`https://wa.me/919159165893?text=${encodeURIComponent(text)}`, '_blank');
+    window.open(`https://wa.me/917907878203?text=${encodeURIComponent(text)}`, '_blank');
 
     import('../utils/tracking').then(({ trackEvent }) => {
       trackEvent('contact_form_submit', {

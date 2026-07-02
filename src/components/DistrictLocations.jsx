@@ -66,8 +66,8 @@ export default function DistrictLocations({ onDistrictClick }) {
       <BackgroundDecorations />
       <div className="container">
         <div className="district-section-header">
-          <span className="district-label">Explore Our Locations</span>
-          <h2 className="district-heading">Where We Build Dreams</h2>
+          <span className="about-label-pill">Explore Our Locations</span>
+          <h2 className="district-heading">WHERE WE BUILD <span className="text-highlight-red">DREAMS</span></h2>
           <p className="district-subtext">
             From the serene landscapes of Kerala to the vibrant cities of Tamil Nadu — discover premium properties across Southern India.
           </p>

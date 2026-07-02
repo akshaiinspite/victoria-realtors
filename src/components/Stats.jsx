@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ShieldCheck, Building, Users, Award } from 'lucide-react';
+import { Building, Award, Home, Key } from 'lucide-react';
 
 function CountUp({ end, duration = 2000 }) {
   const [count, setCount] = useState(0);
@@ -7,6 +7,8 @@ function CountUp({ end, duration = 2000 }) {
   const hasAnimated = useRef(false);
 
   useEffect(() => {
+    hasAnimated.current = false;
+    setCount(0);
     const observer = new IntersectionObserver(
       (entries) => {
         const [entry] = entries;
@@ -68,28 +70,28 @@ function CountUp({ end, duration = 2000 }) {
 export default function Stats() {
   const statsData = [
     { 
-      number: '20+', 
-      title: 'Years of Trust', 
-      desc: 'Established Legacy',
-      icon: <ShieldCheck size={24} className="stat-icon" /> 
-    },
-    { 
-      number: '40+', 
-      title: 'Delivered Projects', 
-      desc: 'Architectural Excellence',
+      number: '24', 
+      title: 'Running Projects', 
+      desc: 'Under Active Construction',
       icon: <Building size={24} className="stat-icon" /> 
     },
     { 
-      number: '1,500+', 
-      title: 'Happy Families', 
-      desc: 'Delighted Homeowners',
-      icon: <Users size={24} className="stat-icon" /> 
+      number: '40', 
+      title: 'Completed Projects', 
+      desc: 'Successfully Handed Over',
+      icon: <Award size={24} className="stat-icon" /> 
     },
     { 
-      number: '99%', 
-      title: 'Customer Satisfaction', 
-      desc: 'Industry-Leading Trust',
-      icon: <Award size={24} className="stat-icon" /> 
+      number: '1,371', 
+      title: 'Total Villas Built', 
+      desc: 'Across Southern India',
+      icon: <Home size={24} className="stat-icon" /> 
+    },
+    { 
+      number: '1,300', 
+      title: 'Villas Completed', 
+      desc: 'Happy Families Moved In',
+      icon: <Key size={24} className="stat-icon" /> 
     }
   ];
 

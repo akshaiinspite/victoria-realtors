@@ -53,24 +53,12 @@ export default function Navbar({ currentPage, setCurrentPage, setFilters, compar
   const navLinks = [
     { name: 'Home', path: '#' },
     { name: 'About', path: '#about' },
-    { 
-      name: 'Projects', 
-      path: '#',
-      dropdown: [
-        { name: 'Trivandrum', path: 'https://victoriarealtors.in/villas-in-trivandrum/' },
-        { name: 'Thrissur', path: 'https://victoriarealtors.in/villas-in-thrissur' },
-        { name: 'Palakkad', path: 'https://victoriarealtors.in/villas-in-palakkad/' },
-        { name: 'Ottapalam', path: 'https://victoriarealtors.in/villas-in-ottapalam/' },
-        { name: 'Irinjalakuda', path: 'https://victoriarealtors.in/projects/irinjalakuda/' },
-        { name: 'Coimbatore', path: 'https://victoriarealtors.in/projects/coimbatore/' },
-        { name: 'Tiruppur', path: 'https://victoriarealtors.in/projects/tiruppur/' }
-      ]
-    },
+    { name: 'Projects', path: '#projects' },
     // { name: `Compare (${comparisonList.length})`, path: '#compare' },
     { name: 'Reels', path: '#reels' },
     // { name: 'NRI Investment', path: '#nri' },
     { name: 'Careers', path: '#careers' },
-    { name: 'Blog', path: '#blog' },
+    // { name: 'Blog', path: '#blog' },
     { name: 'Contact', path: '#contact' }
   ];
 
@@ -86,11 +74,11 @@ export default function Navbar({ currentPage, setCurrentPage, setFilters, compar
             </span>
             <span className="topbar-item">
               <Mail size={14} className="text-primary" />
-              <a href="mailto:enquiry@victoriarealtors.in">enquiry@victoriarealtors.in</a>
+              <a href="mailto:Victoriasooraj@gmail.com">Victoriasooraj@gmail.com</a>
             </span>
             <span className="topbar-item">
               <Phone size={14} className="text-primary" />
-              <a href="tel:+919159165893">+91 91591 65893</a>
+              <a href="tel:+917907878203">+91 79078 78203</a>
             </span>
           </div>
           <div className="topbar-social">
@@ -101,7 +89,7 @@ export default function Navbar({ currentPage, setCurrentPage, setFilters, compar
             <a href="https://www.linkedin.com/in/victoriarealtors/" target="_blank" rel="noreferrer" className="topbar-social-link ln" title="LinkedIn"><LinkedinIcon /></a>
             <a href="https://in.pinterest.com/victoriadevelopers/boards/" target="_blank" rel="noreferrer" className="topbar-social-link pin" title="Pinterest"><PinterestIcon /></a>
             <a href="https://t.me/Vrpkd" target="_blank" rel="noreferrer" className="topbar-social-link tg" title="Telegram"><TelegramIcon /></a>
-            <a href="https://wa.me/919159165893" target="_blank" rel="noreferrer" className="topbar-social-link wa" title="WhatsApp"><WhatsappIcon /></a>
+            <a href="https://wa.me/917907878203" target="_blank" rel="noreferrer" className="topbar-social-link wa" title="WhatsApp"><WhatsappIcon /></a>
           </div>
         </div>
       </div>
@@ -178,6 +166,7 @@ export default function Navbar({ currentPage, setCurrentPage, setFilters, compar
                       className={`nav-link ${
                         (link.name === 'Home' && currentPage === 'home') || 
                         (link.name === 'About' && currentPage === 'about') ||
+                        (link.name === 'Projects' && (currentPage === 'projects' || currentPage === 'project-details')) ||
                         (link.name === 'Careers' && currentPage === 'careers') ||
                         (link.name === 'Reels' && currentPage === 'reels') ||
                         (link.name === 'NRI Investment' && currentPage === 'nri') ||
@@ -192,6 +181,7 @@ export default function Navbar({ currentPage, setCurrentPage, setFilters, compar
                         setCurrentPage(
                           link.name === 'Home' ? 'home' : 
                           link.name === 'About' ? 'about' : 
+                          link.name === 'Projects' ? 'projects' : 
                           link.name === 'Careers' ? 'careers' : 
                           link.name === 'Reels' ? 'reels' : 
                           link.name === 'NRI Investment' ? 'nri' : 

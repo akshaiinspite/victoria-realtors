@@ -48,8 +48,8 @@ export default function GoogleReviews() {
       <BackgroundDecorations />
       <div className="container">
         <div className="section-header">
-          <span>Customer Trust & Testimonials</span>
-          <h2>Verified Google Reviews</h2>
+          <span className="section-header-pill">Customer Trust & Testimonials</span>
+          <h2>VERIFIED GOOGLE <span className="text-highlight-red">REVIEWS</span></h2>
           <p>Read real experiences shared by our homeowners on Google Business Profile.</p>
         </div>
 

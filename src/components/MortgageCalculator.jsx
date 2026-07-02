@@ -301,7 +301,7 @@ export default function MortgageCalculator() {
               </div>
 
               <a 
-                href="https://wa.me/919159165893?text=Hi,%20I%20would%20like%20to%20consult%20your%20home%20loan%20experts%20regarding%20properties%20at%20Victoria%20Realtors." 
+                href="https://wa.me/917907878203?text=Hi,%20I%20would%20like%20to%20consult%20your%20home%20loan%20experts%20regarding%20properties%20at%20Victoria%20Realtors." 
                 target="_blank" 
                 rel="noreferrer" 
                 className="btn btn-primary" 
@@ -421,7 +421,7 @@ export default function MortgageCalculator() {
               </div>
 
               <a 
-                href={`https://wa.me/919159165893?text=Hi,%20I%20ran%20the%20Eligibility%20Checker.%20My%20income%20is%20₹${monthlyIncome}k%20and%20max%20loan%20is%20₹${(maxLoanEligible / 100000).toFixed(2)}%20Lakhs.%20Please%20suggest%20villas%20under%20this%20budget.`} 
+                href={`https://wa.me/917907878203?text=Hi,%20I%20ran%20the%20Eligibility%20Checker.%20My%20income%20is%20₹${monthlyIncome}k%20and%20max%20loan%20is%20₹${(maxLoanEligible / 100000).toFixed(2)}%20Lakhs.%20Please%20suggest%20villas%20under%20this%20budget.`} 
                 target="_blank" 
                 rel="noreferrer" 
                 className="btn btn-primary" 
@@ -541,7 +541,7 @@ export default function MortgageCalculator() {
               </div>
 
               <a 
-                href={`https://wa.me/919159165893?text=Hi,%20I%20am%20an%20investor.%20I%20am%20looking%20for%20high%20rental%20yield%20villas%20around%20₹${roiBudget}%20Lakhs%20with%20good%20capital%20appreciation.`} 
+                href={`https://wa.me/917907878203?text=Hi,%20I%20am%20an%20investor.%20I%20am%20looking%20for%20high%20rental%20yield%20villas%20around%20₹${roiBudget}%20Lakhs%20with%20good%20capital%20appreciation.`} 
                 target="_blank" 
                 rel="noreferrer" 
                 className="btn btn-primary" 

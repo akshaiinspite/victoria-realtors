@@ -19,11 +19,12 @@ import Blog from './components/Blog';
 import BlogDetails from './components/BlogDetails';
 import Reels from './components/Reels';
 import SmartNotes from './components/SmartNotes';
-import ExitIntentPopup from './components/ExitIntentPopup';
+// import ExitIntentPopup from './components/ExitIntentPopup';
 import AIWebsiteAssistant from './components/AIWebsiteAssistant';
 import NRIJourney from './components/NRIJourney';
 import Comparison from './components/Comparison';
 import GoogleReviews from './components/GoogleReviews';
+import TravelShowcase from './components/TravelShowcase';
 import { allBlogs } from './data/blogs';
 import { trackEvent } from './utils/tracking';
 import { getOrganizationSchema, getProductSchema, getFAQAndArticleSchema, injectJSONLD } from './utils/seo';
@@ -275,7 +276,7 @@ export default function App() {
 
   const handleEnquireProperty = (propertyName) => {
     const text = `Hi, I would like to enquire about ${propertyName} at Victoria Realtors.`;
-    const whatsappUrl = `https://wa.me/919159165893?text=${encodeURIComponent(text)}`;
+    const whatsappUrl = `https://wa.me/917907878203?text=${encodeURIComponent(text)}`;
     window.open(whatsappUrl, '_blank');
 
     trackEvent('whatsapp_conversion', {
@@ -302,7 +303,7 @@ export default function App() {
   return (
     <>
       <Navbar currentPage={currentPage} setCurrentPage={setCurrentPage} setFilters={setFilters} comparisonList={comparisonList} />
-      <main style={{ marginTop: 'calc(var(--header-height) + var(--topbar-height))' }}>
+      <main style={{ marginTop: currentPage === 'home' ? '0' : 'calc(var(--header-height) + var(--topbar-height))' }}>
         {currentPage === 'about' ? (
           <AboutUs onBackToHome={() => setCurrentPage('home')} />
         ) : currentPage === 'contact' ? (
@@ -365,6 +366,7 @@ export default function App() {
               }}
             />
             <CompanyIntro />
+            <TravelShowcase />
             <Testimonials />
             <GoogleReviews />
             <BlogSection 
@@ -381,7 +383,7 @@ export default function App() {
       />
       
       {/* Global Marketing & Engagement Systems */}
-      <ExitIntentPopup onSubmitLead={handleAddLead} trackEngagement={trackEngagement} />
+      {/* <ExitIntentPopup onSubmitLead={handleAddLead} trackEngagement={trackEngagement} /> */}
       <AIWebsiteAssistant onSubmitLead={handleAddLead} trackEngagement={trackEngagement} properties={propertiesList} />
     </>
   );

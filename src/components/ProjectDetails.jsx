@@ -1,34 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   MapPin, Maximize, Award, Heart, ArrowLeft, Shield, CheckCircle, 
   ChevronRight, Phone, Send, Info, Eye, ArrowRight, Compass, Navigation, Landmark, Plane,
-  // Amenity icons
-  ShieldCheck, Video, ShieldAlert, Grid, Droplet, Smile, Lightbulb, Zap,
-  ArrowUpDown, Car, Dumbbell, PhoneCall, CloudRain, Trees, Sun
+  Camera
 } from 'lucide-react';
-import { getPropertyById, getPropertyDetails, allProperties } from '../data/properties';
+import { getPropertyDetails, allProperties } from '../data/properties';
 import './ProjectDetails.css';
 
-// Map icon names to lucide components
-const IconMap = {
-  ShieldCheck: ShieldCheck,
-  Video: Video,
-  ShieldAlert: ShieldAlert,
-  Grid: Grid,
-  Droplet: Droplet,
-  Smile: Smile,
-  Lightbulb: Lightbulb,
-  Zap: Zap,
-  ArrowUpDown: ArrowUpDown,
-  Car: Car,
-  Dumbbell: Dumbbell,
-  PhoneCall: PhoneCall,
-  CloudRain: CloudRain,
-  Trees: Trees,
-  Sun: Sun
-};
-
-export default function ProjectDetails({ projectId, onBack, onEnquire, onSelectProject, trackEngagement, properties = allProperties }) {
+export default function ProjectDetails({ projectId, onBack, onEnquire, onSelectProject, properties = allProperties }) {
   const property = properties.find(p => p.id === projectId);
   const details = getPropertyDetails(property);
 
@@ -72,40 +51,6 @@ export default function ProjectDetails({ projectId, onBack, onEnquire, onSelectP
   const [lightboxImage, setLightboxImage] = useState(null);
   const [formData, setFormData] = useState({ name: '', email: '', mobile: '' });
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [virtualTourTab, setVirtualTourTab] = useState('360');
-
-  // Interactive 360 Walkthrough States
-  const [activeWalkthroughRoom, setActiveWalkthroughRoom] = useState('living');
-  const [panAngle, setPanAngle] = useState(-150); // Starts at center center
-  const [isDraggingPano, setIsDraggingPano] = useState(false);
-  const startXRef = useRef(0);
-  const lastAngleRef = useRef(-150);
-
-  const handlePanoMouseDown = (e) => {
-    setIsDraggingPano(true);
-    startXRef.current = e.clientX;
-    lastAngleRef.current = panAngle;
-  };
-  const handlePanoMouseMove = (e) => {
-    if (!isDraggingPano) return;
-    const dx = e.clientX - startXRef.current;
-    setPanAngle(lastAngleRef.current + dx);
-    if (trackEngagement) trackEngagement(0.2);
-  };
-  const handlePanoMouseUp = () => {
-    setIsDraggingPano(false);
-  };
-  const handlePanoTouchStart = (e) => {
-    setIsDraggingPano(true);
-    startXRef.current = e.touches[0].clientX;
-    lastAngleRef.current = panAngle;
-  };
-  const handlePanoTouchMove = (e) => {
-    if (!isDraggingPano) return;
-    const dx = e.touches[0].clientX - startXRef.current;
-    setPanAngle(lastAngleRef.current + dx);
-    if (trackEngagement) trackEngagement(0.2);
-  };
 
   // Scroll to top on load
   useEffect(() => {
@@ -137,15 +82,13 @@ export default function ProjectDetails({ projectId, onBack, onEnquire, onSelectP
     e.preventDefault();
     if (!formData.name || !formData.mobile) return;
     
-    // Simulate inquiry submit
     setIsSubmitted(true);
     setTimeout(() => {
       // Open WhatsApp with form details
       const text = `Hi, I am interested in ${property.name} (${property.location}).\nMy Name: ${formData.name}\nPhone: ${formData.mobile}\nEmail: ${formData.email || 'N/A'}`;
-      const whatsappUrl = `https://wa.me/919159165893?text=${encodeURIComponent(text)}`;
+      const whatsappUrl = `https://wa.me/917907878203?text=${encodeURIComponent(text)}`;
       window.open(whatsappUrl, '_blank');
       
-      // Reset form
       setFormData({ name: '', email: '', mobile: '' });
       setIsSubmitted(false);
     }, 1500);
@@ -155,7 +98,6 @@ export default function ProjectDetails({ projectId, onBack, onEnquire, onSelectP
     setExpandedSpec(prev => (prev === index ? -1 : index));
   };
 
-  // Sticky sub-nav click scroll handler
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
     if (element) {
@@ -171,6 +113,13 @@ export default function ProjectDetails({ projectId, onBack, onEnquire, onSelectP
       });
     }
   };
+
+  // Get 3 sharp images for our collage layout
+  const collageImages = [
+    `/assets/properties/${details.gallery[0] || property.img}`,
+    `/assets/properties/${details.gallery[1] || 'featured.jpg'}`,
+    `/assets/properties/${details.gallery[2] || 'elevation-486x273.jpg'}`
+  ];
 
   return (
     <div className="project-details-page animate-fade-in">
@@ -191,42 +140,74 @@ export default function ProjectDetails({ projectId, onBack, onEnquire, onSelectP
         </div>
       </div>
 
-      {/* Project Hero Banner */}
-      <section className="project-detail-hero" style={{ backgroundImage: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.7)), url(/assets/properties/${property.img})` }}>
+      {/* Airbnb-style Premium Photo Collage Grid */}
+      <section className="project-collage-section">
         <div className="container">
-          <div className="hero-details-container">
-            <div className="hero-left">
-              <span className="badge badge-primary" style={{ marginBottom: '1rem', background: 'rgba(210, 38, 45, 0.2)', color: '#fff', borderColor: '#ff5c62' }}>
-                {property.type}
-              </span>
-              <h1 className="detail-title">{property.name}</h1>
-              <div className="detail-meta">
-                <span className="meta-item">
-                  <MapPin size={18} /> {property.location}, India
-                </span>
-                <span className="meta-item">
-                  <Shield size={18} /> RERA: {details.rera}
+          <div className="photo-collage-grid">
+            {/* Left Large main photo */}
+            <div 
+              className="collage-item collage-main"
+              onClick={() => setLightboxImage(collageImages[0])}
+            >
+              <img src={collageImages[0]} alt={`${property.name} Main View`} className="collage-img" />
+              <div className="collage-overlay-chips">
+                <span className="type-badge-chip">{property.type}</span>
+                <span className={`status-badge-chip ${property.status === 'sold' ? 'sold' : 'active'}`}>
+                  {property.status === 'sold' ? 'Sold Out' : 'Active'}
                 </span>
               </div>
             </div>
-            
-            <div className="hero-right">
-              <div className="price-tag-large">
-                <span className="price-label">Starting from</span>
-                <span className="price-val">
+
+            {/* Right stacked photos */}
+            <div className="collage-right-col">
+              <div 
+                className="collage-item collage-sub-top"
+                onClick={() => setLightboxImage(collageImages[1])}
+              >
+                <img src={collageImages[1]} alt={`${property.name} Detail view`} className="collage-img" />
+              </div>
+              <div 
+                className="collage-item collage-sub-bottom"
+                onClick={() => setLightboxImage(collageImages[2])}
+              >
+                <img src={collageImages[2]} alt={`${property.name} Amenity view`} className="collage-img" />
+                <button className="btn-show-all-photos" onClick={() => scrollToSection('gallery')}>
+                  <Camera size={16} /> Show All Photos
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Clean Project Header Info panel */}
+      <section className="project-info-header-panel">
+        <div className="container">
+          <div className="info-panel-inner">
+            <div className="info-panel-left">
+              <h1 className="project-title-text">{property.name}</h1>
+              <div className="project-meta-row">
+                <span className="meta-item-badge">
+                  <MapPin size={16} /> {property.location}, India
+                </span>
+                <span className="meta-item-badge">
+                  <Shield size={16} /> RERA: {details.rera}
+                </span>
+              </div>
+            </div>
+
+            <div className="info-panel-right">
+              <div className="starting-price-box">
+                <span className="lbl">Premium Package from</span>
+                <span className="val">
                   {property.priceText ? property.priceText.replace(' Onwards', '') : `${property.price} Lakhs`}
                 </span>
               </div>
-              <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1.5rem' }}>
-                {property.status !== 'sold' && (
-                  <button onClick={() => onEnquire(property.name)} className="btn btn-primary btn-lg">
-                    Enquire Now
-                  </button>
-                )}
-                <span className={`status-pill ${property.status === 'sold' ? 'sold' : 'active'}`}>
-                  {property.status === 'sold' ? 'Sold Out' : 'Active Listing'}
-                </span>
-              </div>
+              {property.status !== 'sold' && (
+                <button onClick={() => onEnquire(property.name)} className="btn btn-primary btn-panel-enquire">
+                  Enquire Now
+                </button>
+              )}
             </div>
           </div>
         </div>
@@ -240,7 +221,6 @@ export default function ProjectDetails({ projectId, onBack, onEnquire, onSelectP
             <button onClick={() => scrollToSection('configurations')}>Configurations</button>
             <button onClick={() => scrollToSection('amenities')}>Amenities</button>
             <button onClick={() => scrollToSection('gallery')}>Gallery</button>
-            <button onClick={() => scrollToSection('virtual-tour')}>Virtual Tour</button>
             <button onClick={() => scrollToSection('locality-intelligence')}>Locality Details</button>
             <button onClick={() => scrollToSection('specifications')}>Specifications</button>
             {similarProjects.length > 0 && <button onClick={() => scrollToSection('similar')}>Similar Projects</button>}
@@ -340,20 +320,13 @@ export default function ProjectDetails({ projectId, onBack, onEnquire, onSelectP
                     </div>
                     <div className="floorplan-canvas">
                       <svg width="100%" height="180" viewBox="0 0 300 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        {/* Outer wall */}
                         <rect x="10" y="10" width="280" height="160" rx="4" stroke="var(--primary)" strokeWidth="2" fill="var(--bg-primary)" />
-                        
-                        {/* Room partitions */}
                         <line x1="110" y1="10" x2="110" y2="170" stroke="var(--border-color)" strokeWidth="2" />
                         <line x1="110" y1="90" x2="290" y2="90" stroke="var(--border-color)" strokeWidth="2" />
                         <line x1="200" y1="90" x2="200" y2="170" stroke="var(--border-color)" strokeWidth="2" />
                         <line x1="10" y1="100" x2="110" y2="100" stroke="var(--border-color)" strokeWidth="2" />
-                        
-                        {/* Doors (arc representation) */}
                         <path d="M 110,40 A 30,30 0 0,0 80,10" fill="none" stroke="var(--primary)" strokeWidth="1" strokeDasharray="3,3" />
                         <path d="M 200,120 A 30,30 0 0,1 230,90" fill="none" stroke="var(--primary)" strokeWidth="1" strokeDasharray="3,3" />
-                        
-                        {/* Room labels */}
                         <text x="60" y="60" fill="var(--text-secondary)" fontSize="10" textAnchor="middle" fontWeight="bold">LIVING ROOM</text>
                         <text x="60" y="140" fill="var(--text-secondary)" fontSize="10" textAnchor="middle" fontWeight="bold">KITCHEN</text>
                         <text x="200" y="55" fill="var(--text-secondary)" fontSize="10" textAnchor="middle" fontWeight="bold">BEDROOM 1</text>
@@ -374,11 +347,10 @@ export default function ProjectDetails({ projectId, onBack, onEnquire, onSelectP
                 </p>
                 <div className="amenities-grid-container">
                   {details.amenities.map((amenity, idx) => {
-                    const SpecificIcon = IconMap[amenity.icon] || Info;
                     return (
                       <div key={idx} className="amenity-item-card">
                         <div className="amenity-icon-wrapper">
-                          <SpecificIcon size={22} />
+                          <CheckCircle size={22} />
                         </div>
                         <span>{amenity.name}</span>
                       </div>
@@ -413,113 +385,6 @@ export default function ProjectDetails({ projectId, onBack, onEnquire, onSelectP
                     </div>
                   ))}
                 </div>
-              </section>
-
-              {/* Virtual Tours / Matterport Integration */}
-              <section id="virtual-tour" className="details-card glass-card">
-                <div className="section-title-tabs">
-                  <h2>Virtual 3D Experience</h2>
-                  <div className="tour-toggle-tabs">
-                    <button 
-                      className={`tour-tab-btn ${virtualTourTab === '360' ? 'active' : ''}`}
-                      onClick={() => { setVirtualTourTab('360'); if (trackEngagement) trackEngagement(10); }}
-                    >
-                      Interactive 360° Walkthrough
-                    </button>
-                    <button 
-                      className={`tour-tab-btn ${virtualTourTab === 'matterport' ? 'active' : ''}`}
-                      onClick={() => { setVirtualTourTab('matterport'); if (trackEngagement) trackEngagement(15); }}
-                    >
-                      Matterport 3D Space
-                    </button>
-                  </div>
-                </div>
-                <div className="card-divider"></div>
-                
-                {virtualTourTab === '360' ? (
-                  <div className="virtual-360-container">
-                    <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
-                      Drag or swipe left/right across the viewport below to rotate and view the spaces from different angles. Use the hotkeys to jump between rooms.
-                    </p>
-                    
-                    {/* Room Selector */}
-                    <div className="room-selector-row">
-                      {[
-                        { id: 'living', name: 'Living Room', asset: 'featured.jpg' },
-                        { id: 'bedroom', name: 'Master Bedroom', asset: 'punyam.jpg' },
-                        { id: 'garden', name: 'Terrace Garden', asset: 'Top-Builders-in-Palakkad.jpg' }
-                      ].map(room => (
-                        <button
-                          key={room.id}
-                          className={`room-select-chip ${activeWalkthroughRoom === room.id ? 'active' : ''}`}
-                          onClick={() => {
-                            setActiveWalkthroughRoom(room.id);
-                            setPanAngle(-150); // reset position
-                            if (trackEngagement) trackEngagement(10);
-                          }}
-                        >
-                          {room.name}
-                        </button>
-                      ))}
-                    </div>
-
-                    {/* Viewport Frame */}
-                    <div 
-                      className="pano-viewport"
-                      onMouseDown={handlePanoMouseDown}
-                      onMouseMove={handlePanoMouseMove}
-                      onMouseUp={handlePanoMouseUp}
-                      onMouseLeave={handlePanoMouseUp}
-                      onTouchStart={handlePanoTouchStart}
-                      onTouchMove={handlePanoTouchMove}
-                      onTouchEnd={handlePanoMouseUp}
-                    >
-                      <div 
-                        className="pano-canvas"
-                        style={{
-                          backgroundImage: `url(/assets/properties/${
-                            activeWalkthroughRoom === 'living' ? 'featured.jpg' :
-                            activeWalkthroughRoom === 'bedroom' ? 'punyam.jpg' : 'Top-Builders-in-Palakkad.jpg'
-                          })`,
-                          backgroundPosition: `${panAngle}px center`,
-                          cursor: isDraggingPano ? 'grabbing' : 'grab'
-                        }}
-                      >
-                        {/* Hotspots overlay */}
-                        <div className="pano-hotspot" style={{ left: '20%', top: '60%' }}>
-                          <Compass className="hotspot-pulse-icon" />
-                          <span className="hotspot-tooltip">Kitchen Access</span>
-                        </div>
-                        <div className="pano-hotspot" style={{ left: '70%', top: '55%' }}>
-                          <Compass className="hotspot-pulse-icon" />
-                          <span className="hotspot-tooltip">Walk to Master Bed</span>
-                        </div>
-                      </div>
-                      
-                      <div className="pano-controls-overlay">
-                        <button onClick={() => setPanAngle(prev => prev + 50)} className="pano-btn">◀ Rotate Left</button>
-                        <span className="pano-indicator-bubble">Compass Heading: {Math.abs(panAngle % 360)}°</span>
-                        <button onClick={() => setPanAngle(prev => prev - 50)} className="pano-btn">Rotate Right ▶</button>
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="virtual-matterport-container">
-                    <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
-                      Explore a real-time Matterport 3D digital twin of a premium villa. Access high-resolution dollhouse views, measure clearances, and take guided walkthroughs.
-                    </p>
-                    <div className="matterport-iframe-wrapper">
-                      <iframe 
-                        src="https://my.matterport.com/show/?m=JGPnGqyB6q9&play=1&qs=1"
-                        frameBorder="0" 
-                        allowFullScreen 
-                        allow="xr-spatial-tracking"
-                        title="Matterport 3D Gated Villa Showcase"
-                        className="matterport-iframe"
-                      ></iframe>
-                    </div>
-                  </div>
-                )}
               </section>
 
               {/* Locality Intelligence Module */}
@@ -565,73 +430,29 @@ export default function ProjectDetails({ projectId, onBack, onEnquire, onSelectP
                 </div>
               </section>
 
-              {/* Specifications Section */}
+              {/* Technical Specifications Section — Simplified to key bullet items */}
               <section id="specifications" className="details-card glass-card">
                 <h2>Technical Specifications</h2>
                 <div className="card-divider"></div>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
-                  Examine our detailed building specifications below. Click on each category to expand details:
+                <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>
+                  High-quality raw materials and professional building parameters integrated into this development:
                 </p>
                 
-                <div className="specs-accordion">
+                <div className="specs-simplified-grid">
                   {details.specs.map((spec, idx) => {
-                    const isExpanded = expandedSpec === idx;
                     return (
-                      <div key={idx} className={`accordion-item ${isExpanded ? 'expanded' : ''}`}>
-                        <button 
-                          className="accordion-trigger" 
-                          onClick={() => toggleSpec(idx)}
-                        >
-                          <span>{spec.title}</span>
-                          <span className="accordion-icon">{isExpanded ? '-' : '+'}</span>
-                        </button>
-                        
-                        {isExpanded && (
-                          <div className="accordion-content">
-                            <div className="specs-table-wrapper">
-                              <table className="specs-table">
-                                <thead>
-                                  <tr>
-                                    <th>Feature</th>
-                                    <th>Advantage</th>
-                                    <th>Benefit</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  {spec.details.map((detail, dIdx) => (
-                                    <tr key={dIdx}>
-                                      <td data-label="Feature" className="spec-feat"><strong>{detail.feature}</strong></td>
-                                      <td data-label="Advantage" className="spec-adv">{detail.advantage}</td>
-                                      <td data-label="Benefit" className="spec-ben">{detail.benefit}</td>
-                                    </tr>
-                                  ))}
-                                </tbody>
-                              </table>
-                            </div>
-                          </div>
-                        )}
+                      <div key={idx} className="spec-simplified-card">
+                        <h4>{spec.title}</h4>
+                        <ul className="spec-bullets-list">
+                          {spec.details.map((detail, dIdx) => (
+                            <li key={dIdx}>
+                              <strong>{detail.feature}:</strong> {detail.advantage}
+                            </li>
+                          ))}
+                        </ul>
                       </div>
                     );
                   })}
-                </div>
-              </section>
-
-              {/* Approved Banking Partners */}
-              <section className="details-card glass-card">
-                <h2>Approved Banking Partners</h2>
-                <div className="card-divider"></div>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
-                  This project has been pre-approved for home loans by major Indian banking and financial institutions.
-                </p>
-                <div className="banks-grid">
-                  {['State Bank of India', 'HDFC Bank', 'ICICI Bank', 'LIC Housing Finance', 'Federal Bank', 'Axis Bank'].map((bank, bIdx) => (
-                    <div key={bIdx} className="bank-logo-card">
-                      <div className="bank-logo-placeholder">
-                        <span>{bank.split(' ').map(w => w[0]).join('')}</span>
-                      </div>
-                      <span>{bank}</span>
-                    </div>
-                  ))}
                 </div>
               </section>
 
@@ -711,8 +532,8 @@ export default function ProjectDetails({ projectId, onBack, onEnquire, onSelectP
                 
                 <div className="sidebar-contact-badge">
                   <span>OR DIRECT CALL</span>
-                  <a href="tel:+919159165893" className="phone-link">
-                    +91 91591 65893
+                  <a href="tel:+917907878203" className="phone-link">
+                    +91 79078 78203
                   </a>
                 </div>
               </aside>
@@ -722,7 +543,7 @@ export default function ProjectDetails({ projectId, onBack, onEnquire, onSelectP
         </div>
       </div>
 
-      {/* AI Recommended Matches Section */}
+      {/* Recommended Matches Section */}
       {similarProjects.length > 0 && (
         <section id="similar" className="similar-projects-section section" style={{ borderTop: '1px solid var(--border-color)', background: 'var(--bg-primary)' }}>
           <div className="container">
@@ -802,9 +623,9 @@ export default function ProjectDetails({ projectId, onBack, onEnquire, onSelectP
       {/* Lightbox Modal */}
       {lightboxImage && (
         <div className="lightbox-overlay" onClick={() => setLightboxImage(null)}>
-          <div className="lightbox-content animate-scale-up" onClick={(e) => e.stopPropagation()}>
+          <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
             <button className="lightbox-close" onClick={() => setLightboxImage(null)}>&times;</button>
-            <img src={lightboxImage} alt="Expanded project gallery view" className="lightbox-img" />
+            <img src={lightboxImage} alt="Expanded view" className="lightbox-img" />
           </div>
         </div>
       )}

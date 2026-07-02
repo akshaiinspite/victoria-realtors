@@ -168,7 +168,7 @@ export default function AIWebsiteAssistant({ onSubmitLead, properties = allPrope
         aria-label="AI Website Assistant"
       >
         {isOpen ? <X size={24} /> : <MessageSquare size={24} />}
-        {!isOpen && <span className="bubble-tooltip">AI Assistant 💬</span>}
+        {!isOpen && <span className="bubble-tooltip">AI Assistant ✨</span>}
       </button>
 
       {/* Chat Drawer Widget */}
@@ -224,7 +224,7 @@ export default function AIWebsiteAssistant({ onSubmitLead, properties = allPrope
                               <span><DollarSign size={10} /> {p.priceText}</span>
                             </div>
                             <a 
-                              href={`https://wa.me/919159165893?text=Interested%20in%20${encodeURIComponent(p.name)}`} 
+                              href={`https://wa.me/917907878203?text=Interested%20in%20${encodeURIComponent(p.name)}`} 
                               target="_blank" 
                               rel="noreferrer" 
                               className="chat-prop-enquire-btn"

@@ -155,9 +155,28 @@ a {
   margin-bottom: 0.75rem;
 }
 
+.section-header-pill {
+  display: inline-block;
+  padding: 0.35rem 1.15rem;
+  border: 1.5px solid var(--primary);
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--primary);
+  background: rgba(210, 38, 45, 0.05);
+  margin-bottom: 1.5rem;
+}
+
 .section-header h2 {
-  font-size: 2.75rem;
-  margin-bottom: 1rem;
+  font-family: var(--font-sans);
+  font-size: clamp(2rem, 3vw, 2.75rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: 1.25rem;
 }
 
 .section-header p {

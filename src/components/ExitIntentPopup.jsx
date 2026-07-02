@@ -51,7 +51,7 @@ export default function ExitIntentPopup({ onSubmitLead }) {
 Name: ${name}
 Phone: ${phone}
 Location: ${location || 'Not Specified'}`;
-      window.open(`https://wa.me/919159165893?text=${encodeURIComponent(text)}`, '_blank');
+      window.open(`https://wa.me/917907878203?text=${encodeURIComponent(text)}`, '_blank');
       setIsVisible(false);
       setSubmitted(false);
       setName('');

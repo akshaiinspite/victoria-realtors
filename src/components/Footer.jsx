@@ -73,13 +73,13 @@ export default function Footer({ setCurrentPage, onSelectProject }) {
               <div className="footer-contact-item">
                 <Mail size={16} className="footer-contact-icon" />
                 <div className="footer-contact-text">
-                  <a href="mailto:enquiry@victoriarealtors.in">enquiry@victoriarealtors.in</a>
+                  <a href="mailto:Victoriasooraj@gmail.com">Victoriasooraj@gmail.com</a>
                 </div>
               </div>
               <div className="footer-contact-item">
                 <Phone size={16} className="footer-contact-icon" />
                 <div className="footer-contact-text">
-                  <a href="tel:+919159165893">+91 91591 65893</a> / <a href="tel:+919514778788">+91 95147 78788</a>
+                  <a href="tel:+917907878203">+91 79078 78203</a>
                 </div>
               </div>
             </div>
@@ -216,7 +216,7 @@ export default function Footer({ setCurrentPage, onSelectProject }) {
 
       {/* Floating WhatsApp Button */}
       <a 
-        href="https://wa.me/+919159165893/?text=Hi%2C+I+would+like+to+know+more+about+your+projects." 
+        href="https://wa.me/917907878203?text=Hi%2C+I+would+like+to+know+more+about+your+projects." 
         className="whatsapp-float" 
         target="_blank" 
         rel="noreferrer"

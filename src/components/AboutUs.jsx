@@ -73,7 +73,7 @@ export default function AboutUs({ onBackToHome }) {
           </div>
           <div className="about-intro-right animate-fade-in">
             <div className="about-img-frame">
-              <img src="/assets/about/about_corporate.png" alt="Victoria Realtors Luxury Villa Design" />
+              <img src="/assets/banner/IMG-20260630-WA0005.jpg.jpeg" alt="Victoria Realtors Luxury Villa Design" />
               <div className="about-badge">
                 <span className="about-badge-num">20+</span>
                 <span className="about-badge-txt">Years Legacy</span>
@@ -175,7 +175,7 @@ export default function AboutUs({ onBackToHome }) {
             <div className="about-cta-buttons">
               <button onClick={onBackToHome} className="btn btn-primary">Browse Projects</button>
               <a 
-                href="https://wa.me/919159165893?text=Hi,%20I%20visited%20your%20About%20Us%20page%20and%20would%20like%20to%20know%20more%20about%20your%20villas." 
+                href="https://wa.me/917907878203?text=Hi,%20I%20visited%20your%20About%20Us%20page%20and%20would%20like%20to%20know%20more%20about%20your%20villas." 
                 target="_blank" 
                 rel="noreferrer" 
                 className="btn btn-secondary"
